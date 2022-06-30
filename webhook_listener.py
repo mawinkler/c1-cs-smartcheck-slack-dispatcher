@@ -123,6 +123,7 @@ def handler(event):
     else:
         notification_output += "Seems like unknown object got scanned that is not covered in this automation. Kindly contact trend micro support to get it fixed."
 
+    logger.info("Message: %s", notification_output)
     if flag:
         # Construct a new slack message
         slack_message = {
@@ -185,8 +186,10 @@ def index():
     # dssc_json=json.loads(data.decode('utf8').replace("'", '"'))
     dssc_json=json.loads(data.decode('utf8'))
     handler(dssc_json)
+    return "OK"
 
 # Run the application
 if __name__ == '__main__':
     logging.info("All systems operational, beginning application loop")
+    # application.run(ssl_context='adhoc',debug=True, host='0.0.0.0', port=8000)
     application.run(debug=False, host='0.0.0.0', port=8000)
